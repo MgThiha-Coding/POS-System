@@ -25,6 +25,7 @@ class AppNotifier extends ChangeNotifier {
   List<Model> get product => box.values
       .map((element) => Model.fromMap(Map<String, dynamic>.from(element)))
       .toList();
+
   List<Model> get cart => UnmodifiableListView(_cart);
   // CRUD operatiion
   // CREATE
@@ -75,6 +76,14 @@ class AppNotifier extends ChangeNotifier {
       total += item.price * item.qty;
     }
     return total;
+  }
+
+  int get itemQty {
+    int totalQty = 0;
+    for (var i in _cart) {
+      totalQty += i.qty;
+    }
+    return totalQty;
   }
 }
 

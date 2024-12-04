@@ -22,7 +22,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 15, 106, 243),
+      backgroundColor: const Color.fromARGB(255, 22, 23, 24),
       body: Center(
         child: Text(
           'Welcome to SquareSpace POS System',

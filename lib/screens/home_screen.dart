@@ -37,7 +37,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               label: const Text("Admin Dashboard",
                   style: TextStyle(color: Colors.white)),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 77, 184, 255),
+                backgroundColor: const Color.fromARGB(255, 69, 47, 105),
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               ),
@@ -52,8 +52,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             fontStyle: FontStyle.italic,
           ),
         ),
-        backgroundColor:
-            Colors.deepPurpleAccent, // Modern purple tone for the app bar
+        backgroundColor: const Color.fromARGB(
+            255, 247, 145, 12), // Modern purple tone for the app bar
       ),
       body: Padding(
           padding: const EdgeInsets.all(8),
@@ -123,46 +123,54 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         productProvider.product[index].product,
                                         style: const TextStyle(
                                             fontSize: 15,
-                                            color:
-                                                Color.fromARGB(255, 61, 61, 68),
+                                            color: Color.fromARGB(
+                                                255, 232, 232, 236),
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Expanded(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            MaterialButton(
-                                              minWidth: screenWidth / 100,
-                                              color: const Color(
-                                                  0xFF6C63FF), // Bright periwinkle for 'Reduce' button
-                                              onPressed: () {
-                                                notifier.reduceQuantity(
-                                                    productProvider
-                                                        .product[index]);
-                                              },
-                                              child: const Text(
-                                                'Reduce',
-                                                style: TextStyle(
-                                                    color: Colors.white),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Expanded(
+                                                child: MaterialButton(
+                                                  color: const Color(
+                                                      0xFF6C63FF), // Bright periwinkle for 'Reduce' button
+                                                  onPressed: () {
+                                                    notifier.reduceQuantity(
+                                                        productProvider
+                                                            .product[index]);
+                                                  },
+                                                  child: const Text(
+                                                    'Reduce',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                            MaterialButton(
-                                              minWidth: screenWidth / 20,
-                                              color: const Color(
-                                                  0xFF0C7B93), // Muted teal for 'Add' button
-                                              onPressed: () {
-                                                notifier.addtoCart(
-                                                    productProvider
-                                                        .product[index]);
-                                              },
-                                              child: const Text(
-                                                'Add',
-                                                style: TextStyle(
-                                                    color: Colors.white),
+                                              const SizedBox(
+                                                width: 20,
                                               ),
-                                            ),
-                                          ],
+                                              Expanded(
+                                                child: MaterialButton(
+                                                  color: const Color(
+                                                      0xFF0C7B93), // Muted teal for 'Add' button
+                                                  onPressed: () {
+                                                    notifier.addtoCart(
+                                                        productProvider
+                                                            .product[index]);
+                                                  },
+                                                  child: const Text(
+                                                    'Add',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -222,13 +230,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                             productProvider.cart[index].product,
                                             style: const TextStyle(
                                               fontSize: 16,
+                                              color: Colors.white,
                                             ),
                                           ),
                                           trailing: Text(
                                             'Price ${productProvider.cart[index].price.toString()} * ${productProvider.cart[index].qty.toString()} = ${productProvider.cart[index].qty * productProvider.cart[index].price} Ks',
                                             style: const TextStyle(
                                                 fontSize: 14,
-                                                color: Colors.green),
+                                                color: Color.fromARGB(
+                                                    255, 243, 220, 9)),
                                           ),
                                         ),
                                       );
@@ -278,14 +288,36 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text('Your Cart'),
-                        IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const CartScreen()));
-                          },
-                          icon: Icon(Icons.shopping_cart),
+                        Stack(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const CartScreen()));
+                                },
+                                icon: const Icon(Icons.shopping_cart),
+                              ),
+                            ),
+                            Positioned(
+                                right: 7,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(2),
+                                  child: CircleAvatar(
+                                      radius: 8,
+                                      backgroundColor: Colors.red,
+                                      child: Text(
+                                        ref.watch(provider).itemQty.toString(),
+                                        style: const TextStyle(
+                                            fontSize: 9,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                ))
+                          ],
                         ),
                       ],
                     ),
@@ -350,44 +382,54 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         productProvider.product[index].product,
                                         style: const TextStyle(
                                             fontSize: 15,
-                                            color:
-                                                Color.fromARGB(255, 61, 61, 68),
+                                            color: Color.fromARGB(
+                                                255, 253, 253, 253),
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Expanded(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            MaterialButton(
-                                              color: const Color(
-                                                  0xFF6C63FF), // Bright periwinkle for 'Reduce' button
-                                              onPressed: () {
-                                                notifier.reduceQuantity(
-                                                    productProvider
-                                                        .product[index]);
-                                              },
-                                              child: const Text(
-                                                'Reduce',
-                                                style: TextStyle(
-                                                    color: Colors.white),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Expanded(
+                                                child: MaterialButton(
+                                                  color: const Color(
+                                                      0xFF6C63FF), // Bright periwinkle for 'Reduce' button
+                                                  onPressed: () {
+                                                    notifier.reduceQuantity(
+                                                        productProvider
+                                                            .product[index]);
+                                                  },
+                                                  child: const Text(
+                                                    'Reduce',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                            MaterialButton(
-                                              color: const Color(
-                                                  0xFF0C7B93), // Muted teal for 'Add' button
-                                              onPressed: () {
-                                                notifier.addtoCart(
-                                                    productProvider
-                                                        .product[index]);
-                                              },
-                                              child: const Text(
-                                                'Add',
-                                                style: TextStyle(
-                                                    color: Colors.white),
+                                              const SizedBox(
+                                                width: 5,
                                               ),
-                                            ),
-                                          ],
+                                              Expanded(
+                                                child: MaterialButton(
+                                                  color: const Color(
+                                                      0xFF0C7B93), // Muted teal for 'Add' button
+                                                  onPressed: () {
+                                                    notifier.addtoCart(
+                                                        productProvider
+                                                            .product[index]);
+                                                  },
+                                                  child: const Text(
+                                                    'Add',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ],
